@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YAYANG</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+    }
+    #contentArea {
+      width: 100%;
+      height: 100vh;
+      display: none; /* awalnya disembunyikan */
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  </style>
+</head>
+<body id="body" class="body">
+  <!-- Halaman Awal -->
+  <div id="question1" class="front">
+    <h1 class="name">MASUKAN NAMA KAMU</h1>
+    <input class="boxnama" type="text" id="name" placeholder="KETIK NAMA KAMU DISINI" autofocus>
+    <button class="btnname" onclick="Questionfront()">MASUKAN</button>
+    <h1 class="foot">Created by AGA</h1>
+  </div>
+
+  <!-- Audio global -->
+  <audio id="bgm" loop>
+    <source src="Secluded.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Tempat menampilkan content.html -->
+  <div id="contentArea">
+    <iframe src="content.html"></iframe>
+  </div>
+
+  <script>
+    alert ('ISI NYA PAKAI HURUF BESAR YA!!')
+    function Questionfront() {
+      const nama = document.getElementById("name").value.trim();
+      const namaDiizinkan = "SRI SULISTYANINGSIH";
+
+      if (nama === namaDiizinkan) {
+        // Mulai musik
+        document.getElementById("bgm").play();
+
+        // Sembunyikan halaman awal
+        document.getElementById("question1").style.display = "none";
+
+        // Tampilkan content.html di iframe
+        document.getElementById("contentArea").style.display = "block";
+      } else {
+        alert("ini siapa anying. gw gak kenal lu");
+      }
+    }
+  </script>
+</body>
+</html>

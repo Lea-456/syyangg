@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kejutan Untuk Kamu ❤️</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #fff;
+      text-align: center;
+      min-height: 100vh;
+
+      /* Background GIF responsif */
+      background: url("img/pin.gif") no-repeat center center fixed;
+      background-size: cover;
+      position: relative;
+    }
+
+    h1 {
+      margin-top: 5%;
+      font-size: clamp(1.5rem, 5vw, 3em);
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    #teks {
+      font-size: clamp(1rem, 4vw, 1.5em);
+      margin: 5% 10px;
+      opacity: 0;
+      transition: opacity 1s ease;
+      line-height: 1.5;
+    }
+
+    #lihatFotoBtn {
+      display: none;
+      padding: 12px 25px;
+      font-size: clamp(1rem, 4vw, 1.2rem);
+      background: #ff4b6e;
+      border: none;
+      border-radius: 25px;
+      color: white;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: 0.3s;
+    }
+    #lihatFotoBtn:hover { background: #ff2e52; }
+
+    /* Galeri photobooth */
+    .gallery-container {
+      width: 100%;
+      max-width: 500px;
+      margin: 30px auto;
+      position: relative;
+      display: none;
+    }
+
+    .gallery-frame {
+      overflow: hidden;
+      border: 10px solid white;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+
+    .gallery-slide {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .gallery-item {
+      flex: 0 0 100%;
+      position: relative;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .caption {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.6);
+      padding: 6px 12px;
+      border-radius: 10px;
+      font-size: clamp(0.8rem, 3vw, 1rem);
+    }
+
+    /* Tombol navigasi kiri kanan */
+    .nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.5);
+      color: white;
+      border: none;
+      font-size: 2rem;
+      cursor: pointer;
+      padding: 5px 12px;
+      border-radius: 50%;
+      transition: background 0.3s;
+    }
+    .nav-btn:hover { background: rgba(0,0,0,0.8); }
+    .prev { left: -50px; }
+    .next { right: -50px; }
+
+    @media (max-width: 600px) {
+      .prev { left: -35px; font-size: 1.5rem; }
+      .next { right: -35px; font-size: 1.5rem; }
+    }
+
+    @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+  </style>
+</head>
+<body>
+  <h1>Hai Sayang ❤️</h1>
+  <p id="teks"></p>
+  <button id="lihatFotoBtn" onclick="tampilkanFoto()">📷 Lihat Foto</button>
+
+  <!-- Galeri photobooth -->
+  <div class="gallery-container" id="gallery">
+    <div class="gallery-frame">
+      <div class="gallery-slide" id="slide">
+        <div class="gallery-item">
+          <img src="img/ft1.jpg" alt="Foto 1">
+          <div class="caption">BUJETTT CANTIKNYA GA KE COUNTER 🌹</div>
+        </div>
+        <div class="gallery-item">
+          <img src="img/ft2.jpeg" alt="Foto 2">
+          <div class="caption">PINTER YA BUAT ORANG SALTING 💕</div>
+        </div>
+        <div class="gallery-item">
+          <img src="img/ft3.jpeg" alt="Foto 3">
+          <div class="caption">UTUTUU ABISS MARAHANNNN ✨</div>
+        </div>
+        <div class="gallery-item">
+          <img src="img/ft4.jpeg" alt="Foto 4">
+          <div class="caption">Selalu cantik👍🏻 dan selalu sukses🙏🏻</div>
+        </div>
+        <div class="gallery-item">
+          <img src="img/ft5.jpeg" alt="Foto 5">
+          <div class="caption">MAKASIH CANTIKK, SIAPA NIH TUKANG PUNDUNGG ❤️</div>
+        </div>
+      </div>
+    </div>
+    <button class="nav-btn prev" onclick="prevSlide()">❮</button>
+    <button class="nav-btn next" onclick="nextSlide()">❯</button>
+  </div>
+
+  <script>
+    const kalimat = [
+      "Halo sayang kamu itu orang yang paling spesial buat aku 💕",
+      "Makasi udah mau bantu nyembuhin luka nya 😘",
+      "Jangan pernah lupa kalau aku selalu sayang sama kamu ❤️",
+      "Terima kasih udah datang di lini masa kehidupan ku 🌹",
+      "Kamu memang unik tapi aku sayang ✨"
+    ];
+
+    let index = 0;
+    const teksEl = document.getElementById("teks");
+    const tombolFoto = document.getElementById("lihatFotoBtn");
+
+    function tampilkanKalimat() {
+      teksEl.style.opacity = 0;
+      setTimeout(() => {
+        teksEl.textContent = kalimat[index];
+        teksEl.style.opacity = 1;
+        index++;
+        if (index < kalimat.length) {
+          setTimeout(tampilkanKalimat, 12000);
+        } else {
+          tombolFoto.style.display = "inline-block";
+        }
+      }, 500);
+    }
+
+    function tampilkanFoto() {
+      document.getElementById("gallery").style.display = "block";
+      tombolFoto.style.display = "none";
+      startAutoSlide(); // mulai auto slide saat galeri tampil
+    }
+
+    // ==== Slideshow dengan auto + manual ====
+    let currentIndex = 0;
+    let autoSlideInterval;
+
+    function showSlide(i) {
+      const slide = document.getElementById("slide");
+      const total = slide.children.length;
+      if (i >= total) currentIndex = 0;
+      else if (i < 0) currentIndex = total - 1;
+      else currentIndex = i;
+      slide.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+
+    function nextSlide(){
+      showSlide(currentIndex+1);
+    }
+    function prevSlide(){
+      showSlide(currentIndex-1);
+    }
+
+    function startAutoSlide(){
+      autoSlideInterval = setInterval(() => {
+        nextSlide();
+      }, 3000); // ganti tiap 3 detik
+    }
+
+    window.onload = tampilkanKalimat;
+  </script>
+</body>
+</html>
